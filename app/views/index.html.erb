@@ -1,0 +1,47 @@
+<h1>Party List</h1>
+<table>
+  <tr>
+    <td>Hosted By</td>
+    <td>Host Email</td>
+    <td># of Guests</td>
+    <td>Guest Names</td>
+    <td>Venue Name</td>
+    <td>Venue Address</td>
+    <td>Party Theme</td>
+    <td>Party Start Time</td>
+    <td>Party End Time</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td colspan="10"><%= link_to "New",new_party_url %></td>
+  </tr>
+<%- @parties.each %>
+  <tr>
+    <td>
+      <%- if party.host_name.blank? %>
+        No host was found
+      <%- else %>
+        <%= party.host_name %>
+      <%- end %>
+    </td>
+    <td>
+      <%= party.host_email %>
+    </td>
+    <td><%= party.numgsts %></td>
+    <td>
+      <%- party.guest_names.split(',').compact.each do |g| %>
+        <%- f,l=g.split(' ') %>
+        <%= l %>, <%= f %>
+      <%- end %>
+    </td>
+    <td><%= party.venue %></td>
+    <td><%= party.location %></td>
+    <td class="time"><%= party[:when] %></td>
+    <td class="time"><%= party[:when_its_over] %></td>
+    <td><%= party.descript %></td>
+  </tr>
+<%- end %>
+</table>
+<script type="javascript">
+  $('.time').each(function() {$(this).value(moment($(this).value).format('MM/DD/YYYY h:mm a'));});
+</script>
