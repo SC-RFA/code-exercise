@@ -1,4 +1,4 @@
-class PartyController < ApplicationController
+class PartiesController < ApplicationController
   def index
     @parties = Array.new
 
